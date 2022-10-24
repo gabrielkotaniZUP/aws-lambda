@@ -10,10 +10,7 @@ source '.env'
 # Preparamos um diretório de contexto de builds
 rm -rf docker_build_context
 mkdir docker_build_context
-for diretorio in libs 
-do
-  cp -rf "../../${diretorio}" "docker_build_context/${diretorio}"
-done
+
 cp *.yml "docker_build_context" || true
 cp *.dockerfile "docker_build_context" || true
 cp *.txt "docker_build_context" || true
