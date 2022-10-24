@@ -1,0 +1,10 @@
+#Not a real set of services, only a simplification of the build command
+---
+
+services:
+
+  worker:
+    image: '${DOCKER_REPOSITORY}:base'
+    build:
+      context: ./docker_build_context
+      dockerfile: base.dockerfile
