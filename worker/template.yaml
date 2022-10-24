@@ -11,3 +11,20 @@ inputs:
     type: text
     name: ecr_arn
     default: local_lambda/worker
+hooks:
+  - type: run
+    trigger: after-render
+    linux:
+      - pip install --no-cache-dir -r requirements.txt
+    windows:
+      - cmd /c pip install --no-cache-dir -r requirements.txt
+    mac:
+      - pip install --no-cache-dir -r requirements.txt
+  - type: run
+    trigger: after-render
+    linux:
+      - ./build_images.sh
+    windows:
+      - cmd /c build_images.sh
+    mac:
+      - sh ./build_images.sh
