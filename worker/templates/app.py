@@ -80,10 +80,6 @@ def handler(event: dict, context):
         if 'secrets' in event:
             recuperar_secrets(event['secrets'])
 
-        # Recuperamos os SECRETS do AWS SECRETS MANAGER
-        if 'LAMBDA_SECRETS' in os.environ:
-            recuperar_secrets(json.loads(os.environ['LAMBDA_SECRETS']))
-
         # Preparamos as variaveis de ambiente
         if 'environment' in event:  # NUNCA PASSE SENHAS POR AQUI!
             for chave, valor in event['environment'].items():

@@ -2,12 +2,14 @@ description: Build and deploy lambda locally and then to AWS ECR.
 name: aws-lambda
 display-name: aws-lambda
 picture: stack.png
-category: backend # Ref: https://docs.stackspot.com/latest/docs/creators-guide/yaml/#category
+picture: stack.png
+category: Backend # Ref: https://docs.stackspot.com/latest/docs/creators-guide/yaml/#category
 compatibility: # Put a list of technologies compatible with the stack
-  - java
-  - spring
-technologies: # Ref: https://docs.stackspot.com/latest/docs/creators-guide/yaml/#technologies 
-  - docker 
+  - Docker
+  - Python
+technologies: # Ref: https://docs.stackspot.com/latest/docs/creators-guide/yaml/#technologies
+  - Docker
+  - Python 
 about: docs/about.md
 use-cases:
   - title: Use Case Title
