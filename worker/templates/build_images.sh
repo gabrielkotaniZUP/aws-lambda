@@ -19,15 +19,16 @@ cp *.py "docker_build_context" || true
 
 # Saimos e voltamos do diretorio atual por segurança (QUIRK DO DOCKER)
 cd ; cd -
+if [ ${PUSH} != "Nope" ] ; then
+  aws configure set aws_access_key_id "${AWS_ACCESS_KEY_ID}" --profile "${AWS_PROFILE}"
+  aws configure set aws_secret_access_key "${AWS_SECRET_ACCESS_KEY}" --profile "${AWS_PROFILE}"
+  aws configure set aws_session_token "${AWS_SESSION_TOKEN}" --profile "${AWS_PROFILE}"
+  aws configure set aws_ca_bundle "${AWS_CA_BUNDLE}" --profile "${AWS_PROFILE}"
 
-aws configure set aws_access_key_id "${AWS_ACCESS_KEY_ID}" --profile "${AWS_PROFILE}"
-aws configure set aws_secret_access_key "${AWS_SECRET_ACCESS_KEY}" --profile "${AWS_PROFILE}"
-aws configure set aws_session_token "${AWS_SESSION_TOKEN}" --profile "${AWS_PROFILE}"
-aws configure set aws_ca_bundle "${AWS_CA_BUNDLE}" --profile "${AWS_PROFILE}"
+  # Recuperamos a chave de repositório
+  aws ecr get-login-password --profile "${AWS_PROFILE}" | docker login --username AWS --password-stdin "${DOCKER_REPOSITORY}" \
 
-# Recuperamos a chave de repositório
-aws ecr get-login-password --profile "${AWS_PROFILE}" | docker login --username AWS --password-stdin "${DOCKER_REPOSITORY}" \
-
+fi
 # # Realizamos o pull da imagem (podem ser várias) para o repositório local
 # env "DOCKER_REPOSITORY=${DOCKER_REPOSITORY}" docker-compose pull
 # echo "All images pulled from AWS ECR"
