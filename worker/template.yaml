@@ -1,0 +1,9 @@
+name: worker
+description: Creates a Python iamge of lambda to develop and run scripts.
+types:
+  - app-template
+inputs:
+  - label: Project name
+    type: text
+    name: project_name
+    default: project-name
